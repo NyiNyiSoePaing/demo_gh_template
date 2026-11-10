@@ -29,6 +29,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}   # caller repo's GitHub Environment (vars/secrets/protection rules)
     outputs:
       build-id: ${{ steps.meta.outputs.build-id }}
     steps:
@@ -46,6 +47,7 @@ jobs:
           echo "Environment     : ${{ inputs.environment }}"
           echo "Node            : $(node --version)"
           echo "Run tests       : ${{ inputs.run-tests }}"
+          echo "vars.APP_ENV    : ${{ vars.APP_ENV }}"
           ls -la
 
       - name: Check secret
